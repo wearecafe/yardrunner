@@ -25,9 +25,19 @@ branch and PR; every phase ships something whole.
    related articles updated (always `getting-started/staff-and-roles.md`
    when access changes), points on the marketing home page
    (`resources/js/pages/welcome.tsx`), screenshot entries.
-7. **Docs for us:** [features.md](features.md) (and its "Not built yet"
-   table), the area's doc, and a new file in `docs/claude/` for any new
-   outside service.
+7. **Docs for the project** (same PR):
+    - a decision file for every choice: Jon's answers as `confirmed`, your own
+      build-time choices as `proposed` (`Decided by: Claude, at build`), listed
+      in the PR body;
+    - the phase or feature doc: scope, access changes, security notes, UAT
+      rows with feature IDs;
+    - its row in [decisions-index.md](decisions-index.md);
+    - `modules/<module>.md` when how the module is built changed (start the
+      file and add its row to `CLAUDE.md` if the module had none), and the
+      "Not built yet" table in [gap-list.md](gap-list.md);
+    - [permissions.md](permissions.md) and [security.md](security.md) when
+      they change, and a new `docs/claude/<service>.md` for any new outside
+      service (listed in [README.md](README.md#outside-services)).
 8. Format touched files only, type-check, build, run the full suite:
 
     ```bash
@@ -37,6 +47,7 @@ branch and PR; every phase ships something whole.
     npm run build
     composer test        # Pint, PHPStan, PHPUnit
     npm run check        # format + lint, as CI runs it
+    python3 scripts/docs_check.py
     ```
 
 ## Checks before merging (every phase)
@@ -52,23 +63,28 @@ branch and PR; every phase ships something whole.
 | Junk-form sweep                                                | Blank and junk input to every new form: no 500s                                      |
 | Query counts per page                                          | No N+1 queries on the new pages                                                      |
 | MySQL                                                          | The `mysql` CI job (raw SQL and every demo page)                                     |
+| Volume test for each bulk path at realistic size               | Imports, exports and reports at a real yard's size                                   |
+| Docs check                                                     | `python3 scripts/docs_check.py` (also the `docs-check` CI job)                       |
+| CI runner balance                                              | Compare job times; shard when the suite passes about 10 minutes                      |
 
 If a check isn't available in the session (no browser, say), the PR says
 so and the check becomes a UAT row.
 
 ## Merge
 
-- PR body: what was built, the decisions as Jon made them, each check and
-  what it found and fixed, the test count.
-- Wait for every CI job (`tests`, `mysql`), squash-merge, start the next
-  phase.
+- PR body follows `.github/pull_request_template.md`: what was built, Jon's
+  decisions and the proposed build-time choices (each with its file), each
+  check and what it found and fixed, the test count.
+- Wait for every CI job (`tests`, `mysql`, `docs-check`), squash-merge,
+  start the next phase. Several sessions may work at once: rebase on main
+  before merging and never drop another session's doc entries.
 
 ## After merging
 
 - Tell Jon briefly what shipped, what the checks found, and anything to
   decide or test.
-- Add UAT rows to [demo-and-uat.md](demo-and-uat.md) only for what needs a
-  person: real emails, PDFs, phones, wording and judgement. Leave the
-  results for Jon.
-- Update the living docs: [decisions-index.md](decisions-index.md),
-  [permissions.md](permissions.md), [security.md](security.md).
+- The UAT rows (in the feature's own doc, with feature IDs) are only for
+  what needs a person: real emails, PDFs, phones, wording and judgement.
+  Leave the results for Jon.
+- If anything in the living docs was missed in the PR, fix it in a small
+  follow-up PR straight away.

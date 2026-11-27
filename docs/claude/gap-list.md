@@ -3,9 +3,9 @@
 Features that stop short of working end to end, with what's there now and
 what to build, prioritised **Now**, **Next** or **Later**. Moved here from
 the "YardRunner Gap List" page on claude.ai on Nov 27, 2026 (audited against
-main at f8b2a68, Oct 27). The short "Not built yet" table in
-[features.md](features.md#not-built-yet) lists the same kind of thing per
-module; when an item ships, remove it from both.
+main at f8b2a68, Oct 27). The "Not built yet" table at the end lists the same kind of thing per
+module (it was in `features.md` before the module notes split); when an item
+ships, remove it from both.
 
 Left off on purpose: promo codes and a public storefront (open questions in
 [decisions-index.md](decisions-index.md#open-questions)), and anything that
@@ -133,3 +133,31 @@ production.
 - **Later · Alert preferences.** Alert kinds and quiet hours per person.
 - **Later · French for Quebec yards.** Translation keys; start with the
   portal, booking page, texts, emails, invoices and receipts.
+
+## Not built yet
+
+Features the scope docs in `docs/claude` call for that aren't built, or are
+only partly built. Add to this list when something is left out, and
+remove an item when it ships.
+
+| Feature                                      | Area            | What's missing                                                                                                                                                                                                                                 |
+| -------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Payment on delivery (COD)                    | Users and roles | The Collect payment on delivery permission exists, but not the flow: COD stops, the truck's Stripe reader (S710), external terminal, cash, driver report                                                                                       |
+| Count-only receiving for Yard crew           | Users and roles | Yard crew should confirm received quantities and pallet returns without costs. The purchasing screens show costs, so Yard crew don't reach them yet                                                                                            |
+| PIN switching on drivers' and techs' devices | Users and roles | Yard crew, Drivers and Service techs can be switched to by PIN, but the switch is only on the pick queue, not the driver app or fleet screens                                                                                                  |
+| Rental rates hidden from Service techs       | Users and roles | The fleet screens show rental rates, which Service techs shouldn't see                                                                                                                                                                         |
+| QuickBooks page for Accounts                 | Users and roles | Accounts sees the connect and mapping controls. The server refuses them; the page should hide them                                                                                                                                             |
+| Selling prices locked for Purchasing         | Users and roles | The product editor leaves price fields editable for Purchasing. The server ignores the changes; the fields should be disabled                                                                                                                  |
+| Deactivated users list                       | Users and roles | Deactivated users drop out of Settings → Users. They come back only by bringing back their employee record; there's no list of them to reactivate from                                                                                         |
+| Offline work in the yard and on the truck    | Installable app | Offline is a friendly page only. Queuing picks, scale weights, photos and proof of delivery while offline, then syncing, isn't built                                                                                                           |
+| Alert preferences                            | Installable app | Alerts are on or off per device. Choosing which kinds of alert to get, and quiet hours, isn't built                                                                                                                                            |
+| Installable contractor portal                | Installable app | The portal has no manifest of its own, and contractors get no push alerts (delivery on the way, order ready)                                                                                                                                   |
+| One-click DNS setup                          | Emails          | Domain Connect, so yards on GoDaddy, Cloudflare and other supporting hosts add the records by signing in. Needs YardRunner registered as a service provider with each host; until then, yards copy the records or send them to their IT person |
+| DNS host detection                           | Emails          | Spotting where a yard's DNS is hosted and showing steps for that host                                                                                                                                                                          |
+| Logo processing                              | Emails          | Trimming empty margins, resizing and flattening transparent logos. Logos are shown as uploaded, at 40 px tall                                                                                                                                  |
+| Per-yard branding                            | Emails          | A different name, logo or reply-to for each yard. The contact block already uses the yard an email is about                                                                                                                                    |
+| Email log and bounces                        | Emails          | Which emails went to whom, delivered or bounced, on each order and rental; flagging a customer's address when it bounces                                                                                                                       |
+| Line items in emails                         | Emails          | Order and invoice emails show key facts and a link, not the full line items, pallet charges and totals                                                                                                                                         |
+| Branding changes in the yard's audit log     | Emails          | Branding and sending-domain changes are recorded against the tenant, which the yard's own audit page leaves out; staff see them in the back office                                                                                             |
+| Catalogue import                             | Setup           | Loading products and price lists from a spreadsheet. Setup's products step offers to load them by email instead                                                                                                                                |
+| French emails                                | Emails          | Every email is in English                                                                                                                                                                                                                      |

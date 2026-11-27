@@ -1,6 +1,8 @@
-# Demo yard and UAT
+# YardRunner: demo data and UAT
 
-## Demo yard
+**Editing this file:** several sessions may work at once. Read it immediately before writing, and keep every persona and row already here. New UAT rows go in their feature's own doc, not here.
+
+## Demo personas
 
 Escarpment Stone & Landscape Supply, built by `Database\Seeders\DemoYardSeeder`
 with data for every module, dated relative to today and rebuilt nightly
@@ -20,7 +22,7 @@ confirmed and an audit trail.
 | Driver         | Sam Rinaldi    | Driver                | The driver app on a phone-sized screen: his run only, proof of delivery, location                                                    |
 | Contractor     | (portal demo)  | Portal contact        | Reorder, calculator, statement, pallet pickup requests                                                                               |
 
-Facts that affect testing:
+## Facts that affect testing
 
 - The demo yard always uses flat-rate tax and fake card payments, never
   emails its customers, can't connect QuickBooks and sends no push alerts.
@@ -28,21 +30,33 @@ Facts that affect testing:
 - Roles with no persona (Rental desk, Dispatcher, Accounts, Service tech,
   Time & attendance only) are covered by feature tests; add a persona when a
   feature needs one walked through.
+- There's one demo tenant. Cross-tenant checks use tenants made in the
+  tests, not a second demo yard.
 
-## UAT checklist
+## UAT row IDs
 
-Things only a person can confirm: real emails and phones, money in live
-services, wording and judgement. Each row is added when the work that needs
-it merges. Results are Jon's to fill in.
+Every UAT row has a feature ID, `<CODE>-<n>`: the area's code, then the next free number for that code. Each feature's rows live in its own doc. `scripts/docs_check.py` checks that IDs are unique, are never bare numbers, and use a code from this table.
 
-| #   | Area       | Check                                                                                                                                                                                                                         | Result | Notes |
-| --- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----- |
-| 1   | Emails     | Connect one real test domain and confirm it reaches Verified through the CNAMEs (DKIM and bounce MX/SPF)                                                                                                                      |        |       |
-| 2   | Emails     | Customer and user emails render correctly in Gmail, Outlook (Windows and web) and Apple Mail, light and dark                                                                                                                  |        |       |
-| 3   | Payments   | A live card payment on a connected account: application fee taken, payout arrives                                                                                                                                             |        |       |
-| 4   | Tax        | Stripe Tax amounts on an Ontario delivery, a Quebec delivery and a pickup match what an accountant expects                                                                                                                    |        |       |
-| 5   | QuickBooks | Invoices, payments, credit memos and refunds land on the right accounts and tax codes in a real company                                                                                                                       |        |       |
-| 6   | Time       | Ontario and Quebec overtime and break defaults confirmed against current law before launch                                                                                                                                    |        |       |
-| 7   | Alerts     | Push alerts arrive on an installed iPhone and an Android phone                                                                                                                                                                |        |       |
-| 8   | Texts      | ETA and rental texts arrive from the production number                                                                                                                                                                        |        |       |
-| 9   | Edge cache | After turning on "purge edge cache on deploy" and deploying, the home page and a help article answer with no `Set-Cookie` and `cf-cache-status: HIT` on a second load, and signed-in people still reach the app from "Log in" |        |       |
+To add rows, find the highest number for the code with `grep -ohE "\bCODE-[0-9]+" docs/claude/*.md | sort -t- -k2 -n | tail -1`, then number on from it. A new area gets a new code: add it to this table in the same PR.
+
+| Code | Area                           | Docs                     |
+| ---- | ------------------------------ | ------------------------ |
+| EM   | Emails and sending domains     | `email-branding.md`      |
+| PAY  | Card payments and payouts      | this doc                 |
+| TAX  | Sales tax                      | this doc                 |
+| QB   | QuickBooks Online              | `quickbooks-sync-map.md` |
+| TA   | Time and attendance            | `time-and-attendance.md` |
+| AL   | Staff alerts                   | this doc                 |
+| SMS  | Text messages                  | this doc                 |
+| MK   | Marketing pages and edge cache | `marketing-pages.md`     |
+
+## UAT checklist (foundation)
+
+Rows only for what needs a person: real emails, PDFs, phones, wording, judgement, and accountant or lawyer review. Results are Jon's to fill in.
+
+| #             | Feature  | What to check                                                                                              | Who        | Result |
+| ------------- | -------- | ---------------------------------------------------------------------------------------------------------- | ---------- | ------ |
+| PAY-1 (was 3) | Payments | A live card payment on a connected account: application fee taken, payout arrives                          | Jon        |        |
+| TAX-1 (was 4) | Tax      | Stripe Tax amounts on an Ontario delivery, a Quebec delivery and a pickup match what an accountant expects | Accountant |        |
+| AL-1 (was 7)  | Alerts   | Push alerts arrive on an installed iPhone and an Android phone                                             | Jon        |        |
+| SMS-1 (was 8) | Texts    | ETA and rental texts arrive from the production number                                                     | Jon        |        |

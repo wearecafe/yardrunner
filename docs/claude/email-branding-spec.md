@@ -2,7 +2,7 @@
 
 Oct 27, 2026 · @Jon Moore
 
-> Moved here from the claude.ai doc "YardRunner Email Branding" on Nov 27, 2026. This is the full spec with the email catalogue and layout rules. The summary the code follows is [email-branding.md](email-branding.md); where they differ, the summary and the code win, and what isn't built yet is listed in [features.md](features.md#not-built-yet).
+> Moved here from the claude.ai doc "YardRunner Email Branding" on Nov 27, 2026. This is the full spec with the email catalogue and layout rules. The summary the code follows is [email-branding.md](email-branding.md); where they differ, the summary and the code win, and what isn't built yet is listed in [gap-list.md](gap-list.md#not-built-yet).
 
 ## Overview
 

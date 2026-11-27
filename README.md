@@ -39,7 +39,7 @@ The back office for YardRunner staff is at http://localhost:8000/admin. Give
 yourself access with `php artisan yardrunner:staff:add you@example.com`, open
 the link it prints to choose a password, then turn on two-factor
 authentication (or set `YARDRUNNER_ADMIN_REQUIRE_2FA=false` locally). See
-[docs/claude/features.md](docs/claude/features.md#back-office).
+[docs/claude/modules/back-office.md](docs/claude/modules/back-office.md).
 
 Locally, tax is a flat 13% and card payment links are fake: opening one
 marks the order paid. Set the drivers in `.env` to use Stripe (see
@@ -61,7 +61,7 @@ and lives in hidden `Context`, so queued jobs inherit it. With no tenant
 set, scoped queries return nothing. Validate incoming IDs with
 `TenantRule::exists()` so one tenant can't reference another's rows.
 
-**What's in it.** See [docs/claude/features.md](docs/claude/features.md) for the
+**What's in it.** See [docs/claude/modules](docs/claude/modules/README.md) for the
 modules and where each lives in the code.
 
 **Commerce.** YardRunner owns organizations, customers, products, pricing
@@ -78,7 +78,7 @@ Emails to a yard's own users carry YardRunner's brand
 (`BrandedMail::user`); emails to its customers and suppliers carry the
 yard's (`BrandedMail::customer`, or `YardMail::for`), from the yard's own
 domain once it's verified. See
-[docs/claude/features.md](docs/claude/features.md#emails-and-branding).
+[docs/claude/modules/emails.md](docs/claude/modules/emails.md).
 
 **Orders** (`app/Orders`). Draft, confirmed, released (`fulfilled`), and
 for rentals, returned. Confirming calculates tax and decides settlement:

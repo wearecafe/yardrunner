@@ -36,7 +36,7 @@ there, so Resend never appears in their DNS except the fixed DKIM host name
 **Before launch:** connect one real test domain and confirm Resend verifies
 DKIM and the bounce MX/SPF records when they're reached through these
 CNAMEs. If it doesn't, the fallback is to show the yard Resend's own
-records. This is a UAT row in [demo-and-uat.md](demo-and-uat.md).
+records. This is UAT row EM-1 in [email-branding.md](email-branding.md#uat-rows).
 
 ## Environment
 
@@ -52,4 +52,4 @@ YARDRUNNER_EMAIL_DOMAINS_DRIVER=resend   # fake locally and in the demo yard
 ## Not built yet
 
 Delivery and bounce webhooks (an email log per order and rental, flagging
-bounced addresses). See [features.md](features.md#not-built-yet).
+bounced addresses). See [gap-list.md](gap-list.md#not-built-yet).

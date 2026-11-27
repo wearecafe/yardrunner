@@ -2,7 +2,7 @@
 
 Oct 26, 2026 · @Jon Moore
 
-> Moved here from the claude.ai doc "Yardline Time and Attendance" on Nov 27, 2026. Employees are users and billing is per tracked person (see [decisions-index.md](decisions-index.md)); what's built is in [features.md](features.md#time-and-attendance). The pay-rule defaults below are legal rules to verify before launch.
+> Moved here from the claude.ai doc "Yardline Time and Attendance" on Nov 27, 2026. Employees are users and billing is per tracked person (see [decisions-index.md](decisions-index.md)); what's built is in [modules/time-and-attendance.md](modules/time-and-attendance.md). The pay-rule defaults below are legal rules to verify before launch.
 
 ## Overview
 
@@ -165,3 +165,11 @@ Ship punches, timesheets and payroll export first; driver auto-tracking and labo
 | Union or role-based overtime | None; one set of overtime rules across the whole tenant                                |
 | Pay rates in YardRunner      | Not yet                                                                                |
 | Pricing                      | Paid add-on, priced per user                                                           |
+
+## UAT rows
+
+Results are Jon's to fill in. IDs: `demo-and-uat.md` → UAT row IDs.
+
+| #            | What to check                                                                              | Who                                  | Result |
+| ------------ | ------------------------------------------------------------------------------------------ | ------------------------------------ | ------ |
+| TA-1 (was 6) | Ontario and Quebec overtime and break defaults confirmed against current law before launch | Employment lawyer or payroll adviser |        |

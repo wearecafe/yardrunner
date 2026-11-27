@@ -2,7 +2,7 @@
 
 Oct 26, 2026 · @Jon Moore
 
-> Moved here from the claude.ai doc "Yardline Owner P&L Report" on Nov 27, 2026. Access now follows the job-based roles in [commerce-data-model.md](commerce-data-model.md#roles-and-permissions) (See gross-profit P&L permission); the Staff and Order picker rows below are the old roles. What's built is in [features.md](features.md#profit-and-loss).
+> Moved here from the claude.ai doc "Yardline Owner P&L Report" on Nov 27, 2026. Access now follows the job-based roles in [commerce-data-model.md](commerce-data-model.md#roles-and-permissions) (See gross-profit P&L permission); the Staff and Order picker rows below are the old roles. What's built is in [modules/profit-and-loss.md](modules/profit-and-loss.md).
 
 ## Overview
 
