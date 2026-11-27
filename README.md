@@ -4,7 +4,11 @@ Inventory, pricing and order management for masonry and landscape supply
 yards. Built by Café.
 
 Laravel 13, Inertia 3, React 19, TypeScript, Tailwind 4. Deployed on
-Laravel Cloud.
+Laravel Cloud with MySQL.
+
+How work is done is in [CLAUDE.md](CLAUDE.md); everything we know about the
+product (decisions, scope, integrations, access and security rules) is in
+[docs/claude](docs/claude/decisions-index.md).
 
 ## Run it locally
 
@@ -35,11 +39,11 @@ The back office for YardRunner staff is at http://localhost:8000/admin. Give
 yourself access with `php artisan yardrunner:staff:add you@example.com`, open
 the link it prints to choose a password, then turn on two-factor
 authentication (or set `YARDRUNNER_ADMIN_REQUIRE_2FA=false` locally). See
-[docs/features.md](docs/features.md#back-office).
+[docs/claude/features.md](docs/claude/features.md#back-office).
 
 Locally, tax is a flat 13% and card payment links are fake: opening one
 marks the order paid. Set the drivers in `.env` to use Stripe (see
-[docs/laravel-cloud.md](docs/laravel-cloud.md)).
+[docs/claude/laravel-cloud.md](docs/claude/laravel-cloud.md)).
 
 ```bash
 composer test        # Pint, PHPStan, PHPUnit
@@ -57,7 +61,7 @@ and lives in hidden `Context`, so queued jobs inherit it. With no tenant
 set, scoped queries return nothing. Validate incoming IDs with
 `TenantRule::exists()` so one tenant can't reference another's rows.
 
-**What's in it.** See [docs/features.md](docs/features.md) for the
+**What's in it.** See [docs/claude/features.md](docs/claude/features.md) for the
 modules and where each lives in the code.
 
 **Commerce.** YardRunner owns organizations, customers, products, pricing
@@ -74,7 +78,7 @@ Emails to a yard's own users carry YardRunner's brand
 (`BrandedMail::user`); emails to its customers and suppliers carry the
 yard's (`BrandedMail::customer`, or `YardMail::for`), from the yard's own
 domain once it's verified. See
-[docs/features.md](docs/features.md#emails-and-branding).
+[docs/claude/features.md](docs/claude/features.md#emails-and-branding).
 
 **Orders** (`app/Orders`). Draft, confirmed, released (`fulfilled`), and
 for rentals, returned. Confirming calculates tax and decides settlement:

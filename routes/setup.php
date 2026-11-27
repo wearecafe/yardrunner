@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 // Setup for a new business: its details and yards (required), then the
 // optional steps. Owners and admins are kept here until the first two are
-// saved (EnsureSetUp). See docs/scope/tenant-setup.md.
+// saved (EnsureSetUp). See docs/claude/tenant-setup.md.
 Route::middleware(['auth', 'verified', 'can:manage-business'])
     ->controller(SetupController::class)
     ->prefix('setup')

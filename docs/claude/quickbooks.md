@@ -2,8 +2,9 @@
 
 YardRunner sends its money documents to QuickBooks Online one way, as they
 happen. QuickBooks stays the general ledger. The full record-by-record map
-and the decisions behind it are in the "YardRunner ↔ QuickBooks Online sync
-map" doc; this is the short version for developers.
+and the decisions behind it are in
+[quickbooks-sync-map.md](quickbooks-sync-map.md); this is the short version
+for developers.
 
 ## What goes across
 
