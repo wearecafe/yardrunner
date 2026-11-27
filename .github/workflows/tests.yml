@@ -80,6 +80,10 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run types:check 2>&1 | tee "$RUNNER_TEMP/ts.log"; s=${PIPESTATUS[0]}; [ "$s" -eq 0 ] || touch "$RUNNER_TEMP/ts.failed"; exit $s
 
+      - name: Frontend tests
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm test 2>&1 | tee "$RUNNER_TEMP/vitest.log"; s=${PIPESTATUS[0]}; [ "$s" -eq 0 ] || touch "$RUNNER_TEMP/vitest.failed"; exit $s
+
       - name: Pint
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: vendor/bin/pint --test 2>&1 | tee "$RUNNER_TEMP/pint.log"; s=${PIPESTATUS[0]}; [ "$s" -eq 0 ] || touch "$RUNNER_TEMP/pint.failed"; exit $s
@@ -97,7 +101,7 @@ jobs:
       - name: Report failures
         if: ${{ failure() }}
         run: |
-          for check in setup rollback js-lint ts pint phpstan phpunit; do
+          for check in setup rollback js-lint ts vitest pint phpstan phpunit; do
             if [ -f "$RUNNER_TEMP/$check.failed" ]; then
               .github/scripts/annotate.sh "$check" "$RUNNER_TEMP/$check.log" || true
             fi

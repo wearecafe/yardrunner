@@ -59,7 +59,7 @@ When a module gets substantial work, start its notes file and add a row here.
 
 ## Commands
 
-- `composer test`: Pint, PHPStan and PHPUnit. `npm run check` (format and lint) and `npm run types:check`. All must pass before pushing.
+- `composer test`: Pint, PHPStan and PHPUnit. `npm run check` (format and lint), `npm run types:check` and `npm test` (Vitest and React Testing Library, `*.test.ts(x)` beside the code, imports from `vite-plus/test`). All must pass before pushing.
 - `vendor/bin/pint --dirty` / `npm run check:fix`: format. Only format files you touched.
 - `composer dev`: app, queue and Vite.
 - `php artisan yardrunner:demo:reset`: rebuild the demo yard.
