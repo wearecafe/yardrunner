@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import {
     Clock,
     Boxes,
@@ -18,7 +18,7 @@ import type { LucideIcon } from 'lucide-react';
 import type { ReactNode } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
 import { articleUrl, HelpSearch } from '@/components/help/help-search';
-import { dashboard, login } from '@/routes';
+import { login } from '@/routes';
 
 export { articleUrl, HelpSearch };
 
@@ -128,9 +128,8 @@ export default function HelpLayout({
     showSearch?: boolean;
     children: ReactNode;
 }) {
-    const { auth } = usePage().props;
-    const signedIn = Boolean(auth.user);
-
+    // Help pages are cached at the edge and identical for everyone, so they
+    // never know who's signed in. "Log in" takes signed-in people into the app.
     return (
         <>
             <Head title={title}>
@@ -180,21 +179,12 @@ export default function HelpLayout({
                             >
                                 YardRunner home
                             </Link>
-                            {signedIn ? (
-                                <Link
-                                    href={dashboard()}
-                                    className="rounded-md bg-primary px-4 py-2 font-medium text-primary-foreground"
-                                >
-                                    Open YardRunner
-                                </Link>
-                            ) : (
-                                <Link
-                                    href={login()}
-                                    className="rounded-md px-3 py-2 hover:bg-secondary"
-                                >
-                                    Log in
-                                </Link>
-                            )}
+                            <Link
+                                href={login()}
+                                className="rounded-md px-3 py-2 hover:bg-secondary"
+                            >
+                                Log in
+                            </Link>
                         </div>
                     </div>
                 </header>

@@ -8,6 +8,7 @@ import AuthLayout from '@/layouts/auth-layout';
 import DriverLayout from '@/layouts/driver-layout';
 import SettingsLayout from '@/layouts/settings/layout';
 import SetupLayout from '@/layouts/setup-layout';
+import { loadEdgeCachedPagesInFull } from '@/lib/edge-cached-pages';
 import { initializePwa } from '@/lib/pwa';
 
 const appName = import.meta.env.VITE_APP_NAME || 'YardRunner';
@@ -53,6 +54,9 @@ void createInertiaApp({
 
 // This will set light / dark mode on load...
 initializeTheme();
+
+// The home page and help center come from the edge cache as whole pages.
+loadEdgeCachedPagesInFull();
 
 // The installable app: service worker, updates, install prompt.
 initializePwa();

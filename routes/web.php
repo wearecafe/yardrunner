@@ -1,6 +1,5 @@
 <?php
 
-use App\Billing\Plan;
 use App\Http\Controllers\BrandLogoController;
 use App\Http\Controllers\ContractPriceController;
 use App\Http\Controllers\CounterController;
@@ -13,7 +12,6 @@ use App\Http\Controllers\DispatchController;
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\FakeCheckoutController;
 use App\Http\Controllers\FulfillmentController;
-use App\Http\Controllers\HelpController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\LocationController;
@@ -42,28 +40,13 @@ use App\Http\Controllers\StockLevelController;
 use App\Http\Controllers\StockTransferController;
 use App\Http\Controllers\Webhooks\StripeBillingWebhookController;
 use App\Http\Controllers\Webhooks\StripeWebhookController;
-use App\Support\Demo;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
-Route::get('/', fn () => Inertia::render('welcome', [
-    'demo' => Demo::enabled(),
-    'canRegister' => Features::enabled(Features::registration()),
-    'pricing' => Plan::catalog(),
-]))->name('home');
+// The home page and the help center are in routes/marketing.php: they set
+// no cookies and are served from the edge cache.
 
 // Where the installed app opens: each person's home screen for their roles.
 Route::get('start', [PwaController::class, 'start'])->name('pwa.start');
-
-// The public help center. Articles are Markdown in resources/help.
-Route::controller(HelpController::class)->prefix('help')->name('help.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('search', 'search')->name('search');
-    Route::get('suggest', 'suggest')->middleware('throttle:120,1')->name('suggest');
-    Route::get('{category}', 'category')->where('category', '[a-z0-9-]+')->name('category');
-    Route::get('{category}/{article}', 'article')->where(['category' => '[a-z0-9-]+', 'article' => '[a-z0-9-]+'])->name('article');
-});
 
 // One-click sign-in to the demo yard (404 unless YARDRUNNER_DEMO=true).
 Route::middleware('guest')->group(function () {

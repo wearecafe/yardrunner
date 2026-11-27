@@ -1,4 +1,4 @@
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import type { ReactNode } from 'react';
 import AppLogoIcon from '@/components/app-logo-icon';
 import {
@@ -15,7 +15,7 @@ import {
 import { Chip } from '@/components/yard/chip';
 import type { ChipTone } from '@/components/yard/chip';
 import { formatWholeMoney } from '@/lib/format';
-import { dashboard, login, register } from '@/routes';
+import { login, register } from '@/routes';
 
 type Pricing = {
     currency: string;
@@ -357,16 +357,12 @@ const ctaSecondary =
     'inline-flex h-11 items-center rounded-md border border-border bg-card px-5 font-medium hover:border-foreground';
 
 export default function Welcome({ demo, canRegister, pricing }: Props) {
-    const { auth } = usePage().props;
-    const signedIn = Boolean(auth.user);
-
+    // The home page is cached at the edge and identical for everyone, so it
+    // never knows who's signed in. "Log in" takes signed-in people straight
+    // into the app.
     const primary = demo ? (
         <Link href="/demo" className={ctaPrimary}>
             Try the demo yard
-        </Link>
-    ) : signedIn ? (
-        <Link href={dashboard()} className={ctaPrimary}>
-            Open YardRunner
         </Link>
     ) : canRegister ? (
         <Link href={register()} className={ctaPrimary}>
@@ -375,12 +371,11 @@ export default function Welcome({ demo, canRegister, pricing }: Props) {
     ) : null;
 
     // The trial button repeats at a few decision points down the page.
-    const trialCta =
-        canRegister && !signedIn ? (
-            <Link href={register()} className={ctaPrimary}>
-                Start your free trial
-            </Link>
-        ) : null;
+    const trialCta = canRegister ? (
+        <Link href={register()} className={ctaPrimary}>
+            Start your free trial
+        </Link>
+    ) : null;
 
     return (
         <>
@@ -406,39 +401,28 @@ export default function Welcome({ demo, canRegister, pricing }: Props) {
                             ))}
                         </nav>
                         <div className="flex items-center gap-1 text-sm sm:gap-2">
-                            {signedIn ? (
+                            <Link
+                                href={login()}
+                                className="rounded-md px-3 py-2.5 whitespace-nowrap hover:bg-secondary"
+                            >
+                                Log in
+                            </Link>
+                            {demo ? (
                                 <Link
-                                    href={dashboard()}
+                                    href="/demo"
                                     className="rounded-md bg-primary px-4 py-2.5 font-medium whitespace-nowrap text-primary-foreground"
                                 >
-                                    Open YardRunner
+                                    Try the demo
                                 </Link>
                             ) : (
-                                <>
+                                canRegister && (
                                     <Link
-                                        href={login()}
-                                        className="rounded-md px-3 py-2.5 whitespace-nowrap hover:bg-secondary"
+                                        href={register()}
+                                        className="rounded-md bg-primary px-4 py-2.5 font-medium whitespace-nowrap text-primary-foreground"
                                     >
-                                        Log in
+                                        Set up your yard
                                     </Link>
-                                    {demo ? (
-                                        <Link
-                                            href="/demo"
-                                            className="rounded-md bg-primary px-4 py-2.5 font-medium whitespace-nowrap text-primary-foreground"
-                                        >
-                                            Try the demo
-                                        </Link>
-                                    ) : (
-                                        canRegister && (
-                                            <Link
-                                                href={register()}
-                                                className="rounded-md bg-primary px-4 py-2.5 font-medium whitespace-nowrap text-primary-foreground"
-                                            >
-                                                Set up your yard
-                                            </Link>
-                                        )
-                                    )}
-                                </>
+                                )
                             )}
                         </div>
                     </div>
@@ -1029,8 +1013,7 @@ export default function Welcome({ demo, canRegister, pricing }: Props) {
                                         Try the demo yard
                                     </Link>
                                 ) : (
-                                    canRegister &&
-                                    !signedIn && (
+                                    canRegister && (
                                         <Link
                                             href={register()}
                                             className="inline-flex h-11 items-center rounded-md bg-background px-5 font-medium text-foreground"
@@ -1039,14 +1022,12 @@ export default function Welcome({ demo, canRegister, pricing }: Props) {
                                         </Link>
                                     )
                                 )}
-                                {!signedIn && (
-                                    <Link
-                                        href={login()}
-                                        className="inline-flex h-11 items-center rounded-md border border-primary-foreground/40 px-5 font-medium"
-                                    >
-                                        Log in
-                                    </Link>
-                                )}
+                                <Link
+                                    href={login()}
+                                    className="inline-flex h-11 items-center rounded-md border border-primary-foreground/40 px-5 font-medium"
+                                >
+                                    Log in
+                                </Link>
                             </div>
                         </div>
                     </section>

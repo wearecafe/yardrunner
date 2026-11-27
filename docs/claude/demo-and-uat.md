@@ -35,13 +35,14 @@ Things only a person can confirm: real emails and phones, money in live
 services, wording and judgement. Each row is added when the work that needs
 it merges. Results are Jon's to fill in.
 
-| #   | Area       | Check                                                                                                        | Result | Notes |
-| --- | ---------- | ------------------------------------------------------------------------------------------------------------ | ------ | ----- |
-| 1   | Emails     | Connect one real test domain and confirm it reaches Verified through the CNAMEs (DKIM and bounce MX/SPF)     |        |       |
-| 2   | Emails     | Customer and user emails render correctly in Gmail, Outlook (Windows and web) and Apple Mail, light and dark |        |       |
-| 3   | Payments   | A live card payment on a connected account: application fee taken, payout arrives                            |        |       |
-| 4   | Tax        | Stripe Tax amounts on an Ontario delivery, a Quebec delivery and a pickup match what an accountant expects   |        |       |
-| 5   | QuickBooks | Invoices, payments, credit memos and refunds land on the right accounts and tax codes in a real company      |        |       |
-| 6   | Time       | Ontario and Quebec overtime and break defaults confirmed against current law before launch                   |        |       |
-| 7   | Alerts     | Push alerts arrive on an installed iPhone and an Android phone                                               |        |       |
-| 8   | Texts      | ETA and rental texts arrive from the production number                                                       |        |       |
+| #   | Area       | Check                                                                                                                                                                                                                         | Result | Notes |
+| --- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | ----- |
+| 1   | Emails     | Connect one real test domain and confirm it reaches Verified through the CNAMEs (DKIM and bounce MX/SPF)                                                                                                                      |        |       |
+| 2   | Emails     | Customer and user emails render correctly in Gmail, Outlook (Windows and web) and Apple Mail, light and dark                                                                                                                  |        |       |
+| 3   | Payments   | A live card payment on a connected account: application fee taken, payout arrives                                                                                                                                             |        |       |
+| 4   | Tax        | Stripe Tax amounts on an Ontario delivery, a Quebec delivery and a pickup match what an accountant expects                                                                                                                    |        |       |
+| 5   | QuickBooks | Invoices, payments, credit memos and refunds land on the right accounts and tax codes in a real company                                                                                                                       |        |       |
+| 6   | Time       | Ontario and Quebec overtime and break defaults confirmed against current law before launch                                                                                                                                    |        |       |
+| 7   | Alerts     | Push alerts arrive on an installed iPhone and an Android phone                                                                                                                                                                |        |       |
+| 8   | Texts      | ETA and rental texts arrive from the production number                                                                                                                                                                        |        |       |
+| 9   | Edge cache | After turning on "purge edge cache on deploy" and deploying, the home page and a help article answer with no `Set-Cookie` and `cf-cache-status: HIT` on a second load, and signed-in people still reach the app from "Log in" |        |       |

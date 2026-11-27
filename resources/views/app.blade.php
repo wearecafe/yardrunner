@@ -4,10 +4,17 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {{-- Inline script to detect system dark mode preference and apply it immediately --}}
+        {{-- Inline script to apply light or dark mode before the page paints. App pages
+             get the choice from the server; the edge-cached marketing pages don't read
+             cookies on the server, so the browser reads the appearance cookie itself. --}}
         <script>
             (function() {
-                const appearance = '{{ $appearance ?? "system" }}';
+                const fromCookie = (document.cookie.match(/(?:^|;\s*)appearance=(light|dark|system)/) || [])[1];
+                const appearance = '{{ $appearance ?? "" }}' || fromCookie || 'system';
+
+                if (appearance === 'dark') {
+                    document.documentElement.classList.add('dark');
+                }
 
                 if (appearance === 'system') {
                     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
