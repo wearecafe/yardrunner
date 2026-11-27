@@ -1,0 +1,14 @@
+{
+    "extraKnownMarketplaces": {
+        "worksite": {
+            "source": {
+                "source": "github",
+                "repo": "wearecafe/framework",
+                "path": "marketplace/.claude-plugin/marketplace.json"
+            }
+        }
+    },
+    "enabledPlugins": {
+        "delivery@worksite": true
+    }
+}

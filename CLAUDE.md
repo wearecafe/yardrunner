@@ -19,7 +19,7 @@ This section is the one written copy of the workflow. Other docs, and the claude
 - Every outside service or integration has its own doc, `docs/claude/<service>.md`, listed in `docs/claude/README.md` → Outside services.
 - Every feature ships a help article (`resources/help/{category}`; always update `getting-started/staff-and-roles.md` when access changes), marketing-site points (`resources/js/pages/welcome.tsx`), and UAT rows with feature IDs (`docs/claude/demo-and-uat.md` → UAT row IDs).
 - Run the pre-merge checks in `docs/claude/delivery-checklist.md` and report what they found in the PR (`.github/pull_request_template.md`).
-- Use the `delivery` skills, shared with the whole team: `/feature-shaping` before building, `/phased-delivery` while building, `/security-review` before merging (it reads `docs/claude/security.md` first), and `/decision-batch` to confirm what's pending. In Claude Code with the plugin installed they're `/delivery:<skill>`.
+- Use the `delivery` skills, shared with the whole team: `/feature-shaping` before building, `/phased-delivery` while building, `/security-review` before merging (it reads `docs/claude/security.md` first), and `/decision-batch` to confirm what's pending. In Claude Code, `.claude/settings.json` offers the plugin from `wearecafe/framework`, where they're `/delivery:<skill>`. That repo is the source of the way of working; YardRunner catches up when it changes.
 
 ## Keep this file short
 

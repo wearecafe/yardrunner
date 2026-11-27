@@ -39,16 +39,17 @@ Every UAT row has a feature ID, `<CODE>-<n>`: the area's code, then the next fre
 
 To add rows, find the highest number for the code with `grep -ohE "\bCODE-[0-9]+" docs/claude/*.md | sort -t- -k2 -n | tail -1`, then number on from it. A new area gets a new code: add it to this table in the same PR.
 
-| Code | Area                           | Docs                     |
-| ---- | ------------------------------ | ------------------------ |
-| EM   | Emails and sending domains     | `email-branding.md`      |
-| PAY  | Card payments and payouts      | this doc                 |
-| TAX  | Sales tax                      | this doc                 |
-| QB   | QuickBooks Online              | `quickbooks-sync-map.md` |
-| TA   | Time and attendance            | `time-and-attendance.md` |
-| AL   | Staff alerts                   | this doc                 |
-| SMS  | Text messages                  | this doc                 |
-| MK   | Marketing pages and edge cache | `marketing-pages.md`     |
+| Code | Area                                   | Docs                     |
+| ---- | -------------------------------------- | ------------------------ |
+| EM   | Emails and sending domains             | `email-branding.md`      |
+| PAY  | Card payments and payouts              | this doc                 |
+| TAX  | Sales tax                              | this doc                 |
+| QB   | QuickBooks Online                      | `quickbooks-sync-map.md` |
+| TA   | Time and attendance                    | `time-and-attendance.md` |
+| AL   | Staff alerts                           | this doc                 |
+| SMS  | Text messages                          | this doc                 |
+| MK   | Marketing pages and edge cache         | `marketing-pages.md`     |
+| DW   | Docs, workflow and the delivery plugin | `stack-rules.md`         |
 
 ## UAT checklist (foundation)
 
