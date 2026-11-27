@@ -27,3 +27,7 @@ None.
 ## Security notes
 
 None: docs, a docs check and CI configuration only.
+
+## Found while adopting the framework
+
+The starter kit's `.gitignore` listed `/CLAUDE.md`, so the `CLAUDE.md` written in PR #58 was never committed. The `docs-check` workflow caught it on its first run. The ignore line is removed and `CLAUDE.md` is now tracked.
