@@ -48,7 +48,6 @@ use Illuminate\Support\Facades\Route;
 // Where the installed app opens: each person's home screen for their roles.
 Route::get('start', [PwaController::class, 'start'])->name('pwa.start');
 
-
 // One-click sign-in to the demo yard (404 unless YARDRUNNER_DEMO=true).
 Route::middleware('guest')->group(function () {
     Route::get('demo', [DemoLoginController::class, 'show'])->name('demo');
