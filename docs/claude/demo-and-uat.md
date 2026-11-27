@@ -11,14 +11,14 @@ colour runs, today's pick queue and dispatch board, invoices across every
 aging bucket, returns, pallet deposits, a portal reorder waiting to be
 confirmed and an audit trail.
 
-| Persona        | Name           | Roles                 | Use it to test                                                                                                                                                           |
-| -------------- | -------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Owner          | Gord Hessels   | Owner                 | Everything; pricing, credit limits and overrides, timesheets, the P&L                                                                                                    |
-| Office manager | Lisa Marchetti | Admin                 | Accounts, price lists, payments, settings, credit overrides; no Owner-only rights                                                                                        |
-| Counter sales  | Ryan Tran      | Sales                 | Counter and orders without price or credit control; refund limits                                                                                                        |
-| Yard lead      | Owen Bakker    | Yard crew, Purchasing | Picking and loading, receiving and counts, rental check-in; PIN 2222 at the counter tablet. Purchasing lets him see prices, although his `/demo` card says he never does |
-| Driver         | Sam Rinaldi    | Driver                | The driver app on a phone-sized screen: his run only, proof of delivery, location                                                                                        |
-| Contractor     | (portal demo)  | Portal contact        | Reorder, calculator, statement, pallet pickup requests                                                                                                                   |
+| Persona        | Name           | Roles                 | Use it to test                                                                                                                       |
+| -------------- | -------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Owner          | Gord Hessels   | Owner                 | Everything; pricing, credit limits and overrides, timesheets, the P&L                                                                |
+| Office manager | Lisa Marchetti | Admin                 | Accounts, price lists, payments, settings, credit overrides; no Owner-only rights                                                    |
+| Counter sales  | Ryan Tran      | Sales                 | Counter and orders without price or credit control; refund limits                                                                    |
+| Yard lead      | Owen Bakker    | Yard crew, Purchasing | Picking and loading, receiving and counts, rental check-in; PIN 2222 at the counter tablet. Sees costs and prices through Purchasing |
+| Driver         | Sam Rinaldi    | Driver                | The driver app on a phone-sized screen: his run only, proof of delivery, location                                                    |
+| Contractor     | (portal demo)  | Portal contact        | Reorder, calculator, statement, pallet pickup requests                                                                               |
 
 Facts that affect testing:
 

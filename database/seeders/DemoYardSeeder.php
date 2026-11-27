@@ -121,7 +121,7 @@ class DemoYardSeeder extends Seeder
             'role' => UserRole::YardCrew,
             'roles' => [UserRole::YardCrew, UserRole::Purchasing],
             'title' => 'Yard lead',
-            'description' => 'Yard crew and purchasing: picks and loads, receives and counts stock, and checks rentals back in. Never sees prices. Clocks in at the counter tablet with PIN 2222.',
+            'description' => 'Yard crew and purchasing: picks and loads, receives and counts stock, and checks rentals back in. Sees costs and prices through purchasing. Clocks in at the counter tablet with PIN 2222.',
         ],
         [
             'email' => 'sam.rinaldi@example.com',
