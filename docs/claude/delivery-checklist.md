@@ -52,20 +52,20 @@ branch and PR; every phase ships something whole.
 
 ## Checks before merging (every phase)
 
-| Check                                                          | How here                                                                             |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Permission probe: every role against every new page and action | Feature tests per role, plus the demo personas in [demo-and-uat.md](demo-and-uat.md) |
-| Security tests and a diff review                               | `/security-review` against [security.md](security.md)                                |
-| Dependency audit                                               | `composer audit`, `npm audit`                                                        |
-| Functional run as real demo people                             | Browser script through `/demo`, waiting for each save                                |
-| Link audit with new pages added                                | Every link on the new pages, as each persona                                         |
-| UI crawl: desktop and phone widths, light and dark, axe        | Then look at the screenshots                                                         |
-| Junk-form sweep                                                | Blank and junk input to every new form: no 500s                                      |
-| Query counts per page                                          | No N+1 queries on the new pages                                                      |
-| MySQL                                                          | The `mysql` CI job (raw SQL and every demo page)                                     |
-| Volume test for each bulk path at realistic size               | Imports, exports and reports at a real yard's size                                   |
-| Docs check                                                     | `python3 scripts/docs_check.py` (also the `docs-check` CI job)                       |
-| CI runner balance                                              | Compare job times; shard when the suite passes about 10 minutes                      |
+| Check                                                          | How here                                                                                   |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Permission probe: every role against every new page and action | Feature tests per role, plus the demo personas in [demo-and-uat.md](demo-and-uat.md)       |
+| Security tests and a diff review                               | `/security-review` against [security.md](security.md)                                      |
+| Dependency audit                                               | `composer audit --locked` and `npm audit` (the `Dependency audit` job); any advisory fails |
+| Functional run as real demo people                             | Browser script through `/demo`, waiting for each save                                      |
+| Link audit with new pages added                                | Every link on the new pages, as each persona                                               |
+| UI crawl: desktop and phone widths, light and dark, axe        | Then look at the screenshots                                                               |
+| Junk-form sweep                                                | Blank and junk input to every new form: no 500s                                            |
+| Query counts per page                                          | No N+1 queries on the new pages                                                            |
+| MySQL                                                          | The whole suite runs on MySQL 8.4 in the `tests` workflow, after a migration rollback      |
+| Volume test for each bulk path at realistic size               | Imports, exports and reports at a real yard's size                                         |
+| Docs check                                                     | `python3 scripts/docs_check.py` (also the `docs-check` CI job)                             |
+| CI runner balance                                              | Compare job times; shard when the suite passes about 10 minutes                            |
 
 If a check isn't available in the session (no browser, say), the PR says
 so and the check becomes a UAT row.
@@ -75,7 +75,7 @@ so and the check becomes a UAT row.
 - PR body follows `.github/pull_request_template.md`: what was built, Jon's
   decisions and the proposed build-time choices (each with its file), each
   check and what it found and fixed, the test count.
-- Wait for every CI job (`tests`, `mysql`, `docs-check`), squash-merge,
+- Wait for every CI job (`tests`: suite, audit; `docs-check`), squash-merge,
   start the next phase. Several sessions may work at once: rebase on main
   before merging and never drop another session's doc entries.
 

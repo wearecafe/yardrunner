@@ -21,9 +21,8 @@ edge cache. Each outside service has its own file:
    once locally if `composer.lock` doesn't exist yet).
 2. In Laravel Cloud, create an application from the `wearecafe/yardrunner`
    repository, branch `main`.
-3. Attach a MySQL database. Production runs on MySQL; the `mysql` CI job
-   runs the raw SQL and every demo-yard page against MySQL 8.4 because the
-   main suite uses SQLite.
+3. Attach a MySQL database. Production runs on MySQL, and so does the whole
+   test suite in CI.
 4. Build commands:
 
     ```

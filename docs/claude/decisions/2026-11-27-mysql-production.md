@@ -9,4 +9,4 @@ Decided by: Jon Moore
 
 **Turned down:** Postgres.
 
-**Source:** Project instructions; PR #58.
+**Source:** Project instructions; PR #58. 2026-11-27: the CI part is superseded by `2026-11-27-full-suite-on-mysql.md` (the whole suite now runs on MySQL in CI); production on MySQL stands.
