@@ -91,10 +91,11 @@ Routes anyone can reach without signing in. Each needs a test.
 | Static analysis, formatting, types                                                                                                      | PHPStan, Pint, ESLint, Prettier, `tsc` in CI | In place |
 | Dependency updates                                                                                                                      | Dependabot                                   | In place |
 | Cross-tenant probe: another tenant's admin on every route and method with this tenant's IDs (403/404)                                   | —                                            | Missing  |
+| Shared props guard: the props every page gets, and the user fields in them                                                              | `SharedPropsTest`                            | In place |
 | Sensitive data sweep: markers in prices, costs, balances, pay data and secrets never reach a role not allowed them, on any page or prop | —                                            | Missing  |
 | Write probes: low-privilege roles can't change records outside their scope                                                              | Partly in the role tests                     | Partial  |
 | Hardening: reset enumeration, rate limits, browser headers, credentials in logs, unsafe links                                           | —                                            | Missing  |
-| Marketing pages set no cookies, show nothing about the visitor and send cache headers                                                   | `MarketingPagesTest`                         | In place |
+| Marketing pages set no cookies, show nothing about the visitor, send cache headers, never post, and link only to pages that exist       | `MarketingPagesTest`                         | In place |
 | `composer audit` and `npm audit` in CI                                                                                                  | —                                            | Missing  |
 
 ## Known gaps

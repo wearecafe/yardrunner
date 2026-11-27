@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Help\HelpCenter;
 use App\Http\Middleware\ServeFromEdgeCache;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 use Illuminate\Testing\TestResponse;
 use Inertia\Testing\AssertableInertia as Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -83,6 +85,87 @@ class MarketingPagesTest extends TestCase
     public function test_app_pages_still_use_sessions(): void
     {
         $this->get('/login')->assertOk()->assertCookie('XSRF-TOKEN');
+    }
+
+    /** The page sources behind the marketing routes (keep in step with routes/marketing.php). */
+    private const SOURCES = [
+        'resources/js/pages/welcome.tsx',
+        'resources/js/pages/help',
+        'resources/js/components/help',
+    ];
+
+    public function test_every_help_page_sets_no_cookies_and_can_be_cached(): void
+    {
+        $help = app(HelpCenter::class);
+        $urls = array_map(fn (string $slug) => "/help/{$slug}", array_keys($help->categories()));
+
+        foreach ($help->all() as $article) {
+            $urls[] = "/help/{$article->path()}";
+        }
+
+        $this->assertNotEmpty($help->all());
+
+        foreach ($urls as $url) {
+            $response = $this->get($url);
+            $this->assertSame(200, $response->getStatusCode(), "{$url} should load.");
+            $this->assertNoCookies($response);
+            $this->assertStringContainsString('s-maxage', (string) $response->headers->get('Cache-Control'), "{$url} should be cacheable.");
+        }
+    }
+
+    public function test_links_on_marketing_pages_go_somewhere(): void
+    {
+        $links = [];
+
+        foreach (app(HelpCenter::class)->all() as $article) {
+            preg_match_all('/href="(\/[^"#?]*)/', $article->html, $found);
+            foreach ($found[1] as $link) {
+                $links[$link][] = "/help/{$article->path()}";
+            }
+        }
+
+        foreach ($this->sourceFiles() as $file) {
+            preg_match_all('/href="(\/[^"#?]*)"/', File::get($file), $found);
+            foreach ($found[1] as $link) {
+                $links[$link][] = $file;
+            }
+        }
+
+        $this->assertNotEmpty($links);
+
+        // The demo yard only exists where YARDRUNNER_DEMO is on, and the home
+        // page links it only then (DemoYardTest covers it).
+        unset($links['/demo']);
+
+        foreach ($links as $link => $from) {
+            $status = $this->get($link)->getStatusCode();
+            // App pages send guests to sign in; anything else must load.
+            $this->assertTrue($status === 200 || $status === 302, "{$link} (linked from ".implode(', ', array_unique($from)).") answers {$status}.");
+        }
+    }
+
+    public function test_marketing_pages_have_no_forms_that_post(): void
+    {
+        foreach ($this->sourceFiles() as $file) {
+            $source = File::get($file);
+
+            foreach (['useForm(', '<Form', 'router.post', 'router.put', 'router.patch', 'router.delete', 'method="post"'] as $marker) {
+                $this->assertStringNotContainsString($marker, $source, "{$file} posts ({$marker}); marketing pages have no session or CSRF token.");
+            }
+        }
+    }
+
+    /** @return list<string> */
+    private function sourceFiles(): array
+    {
+        $files = [];
+
+        foreach (self::SOURCES as $path) {
+            $full = base_path($path);
+            $files = [...$files, ...(is_dir($full) ? array_map(fn ($f) => $f->getPathname(), File::allFiles($full)) : [$full])];
+        }
+
+        return $files;
     }
 
     private function assertNoCookies(TestResponse $response): void

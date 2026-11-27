@@ -90,3 +90,7 @@ everyone holding Driver).
 shared tablet with their time-clock PIN (`picker.switch`,
 `Employee::checkPin`, throttled), landing on their home screen; anyone
 who also holds Owner or Admin can't be switched to that way.
+
+## What every page gets
+
+`HandleInertiaRequests` shares `auth.user` as a hand-picked array (`id`, `name`, `email`, `email_verified_at`), plus `auth.roles`, `auth.can` flags, `auth.routes` and `auth.home`. Roles, permissions, phone and tenant never go to pages through the user. `SharedPropsTest` lists every shared prop, `auth.can` flag and user field: add to it on purpose when a page needs more.
