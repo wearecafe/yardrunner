@@ -132,7 +132,9 @@ class HandleInertiaRequests extends Middleware
                 return ['key' => (string) config('yardrunner.push.public_key'), 'alerts' => StaffAlerts::for($user) !== []];
             },
             'portal_flash' => fn () => $request->hasSession() ? $request->session()->get('portal_flash') : null,
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            // Edge-cached marketing pages read no cookies (ServeFromEdgeCache).
+            'sidebarOpen' => $request->attributes->get(ServeFromEdgeCache::ATTRIBUTE) === true
+                || ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
         ];
     }
 

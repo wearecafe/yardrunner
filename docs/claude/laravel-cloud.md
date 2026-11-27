@@ -66,6 +66,28 @@ YARDRUNNER_DEMO=true
 The fake payments driver refuses to run in production. A staging
 environment can use Stripe test keys with the same drivers.
 
+## Edge cache
+
+The home page and the help center (`routes/marketing.php`) are served from
+Laravel Cloud's edge cache, which runs on Cloudflare:
+
+- They run in the `marketing` middleware group: no session, no cookies, no
+  CSRF token, no signed-in user. Cloudflare won't cache a response that sets
+  a cookie.
+- `ServeFromEdgeCache` sends `Cache-Control: public, max-age=300,
+  s-maxage=3600` on successful pages and `no-store` on anything else.
+- The edge keys on the URL alone and ignores `Vary: X-Inertia`, so these
+  pages are always loaded whole: Inertia visits to them get a 409 with a
+  location, and the browser turns them into full page loads before they're
+  sent (`resources/js/lib/edge-cached-pages.ts`).
+- **Turn on "purge edge cache on deploy"** in the environment's network
+  settings, so a deploy never leaves the edge serving pages that point at
+  old built assets. Without it, pages can be up to an hour old after a
+  deploy.
+
+To add a page to the marketing site, put its route in `routes/marketing.php`
+and its path in `isEdgeCachedPath()`; it must render the same for everyone.
+
 ## Demo yard
 
 Run once from Cloud's Commands tab to create it:

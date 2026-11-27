@@ -64,8 +64,8 @@ Routes anyone can reach without signing in. Each needs a test.
 
 | Route                                                    | What                                 | Protection                                                      |
 | -------------------------------------------------------- | ------------------------------------ | --------------------------------------------------------------- |
-| `GET /`                                                  | Marketing home page                  | Static content; no cookies                                      |
-| `GET /help…`, `GET /help/suggest`                        | Help center and search               | Static content; suggest throttled 120/min                       |
+| `GET /`                                                  | Marketing home page                  | `marketing` group: no session or cookies, edge-cached           |
+| `GET /help…`, `GET /help/suggest`                        | Help center and search               | `marketing` group, edge-cached; suggest throttled 120/min       |
 | `GET /start`                                             | Installed app start URL              | Redirects to sign-in when signed out                            |
 | `GET, POST /demo`                                        | Demo yard sign-in                    | 404 unless `YARDRUNNER_DEMO`; demo accounts only; throttled     |
 | `/login`, `/register`, password reset, two-factor        | Fortify                              | Fortify's rate limits                                           |
@@ -93,7 +93,7 @@ Routes anyone can reach without signing in. Each needs a test.
 | Sensitive data sweep: markers in prices, costs, balances, pay data and secrets never reach a role not allowed them, on any page or prop | —                                            | Missing  |
 | Write probes: low-privilege roles can't change records outside their scope                                                              | Partly in the role tests                     | Partial  |
 | Hardening: reset enumeration, rate limits, browser headers, credentials in logs, unsafe links                                           | —                                            | Missing  |
-| Marketing pages set no cookies and send cache headers                                                                                   | Added with the cookieless marketing pages    | Planned  |
+| Marketing pages set no cookies, show nothing about the visitor and send cache headers                                                   | `MarketingPagesTest`                         | In place |
 | `composer audit` and `npm audit` in CI                                                                                                  | —                                            | Missing  |
 
 ## Known gaps

@@ -41,7 +41,15 @@ matters.
   deploy docs outside `docs/claude/`.
 - **Each outside service has its own file** in `docs/claude/`.
 - **Marketing pages (home and help center) set no cookies and are cached at
-  the edge.** Fixed in its own PR. Turned down: logging it as a gap.
+  the edge**, fixed in its own PR (turned down: logging it as a gap). They
+  look the same to everyone: "Log in" takes signed-in people into the app
+  (turned down: swapping buttons in the browser). Links to them are full
+  page loads (turned down: keeping Inertia navigation with a separate data
+  URL). Browsers keep them 5 minutes and the edge an hour, purged on every
+  deploy (turned down: 5 minutes with no purge, a day with purge).
+  ([laravel-cloud.md](laravel-cloud.md#edge-cache))
+- **Owen Bakker's `/demo` card is corrected** to say he sees prices through
+  Purchasing (turned down: making him Yard crew only).
 - **A `/decision-batch` skill** is drafted for Jon to save, for batching
   open questions into multiple-choice rounds.
 - **Production database is MySQL.**
@@ -134,5 +142,4 @@ described with its rule and left for Jon to choose.
 | Rentals    | One account and statement for a customer who rents and buys?                                                                       | [competitive-research.md](competitive-research.md#open-questions-before-mockups) |
 | Rentals    | Damage waiver: built in or through a partner? (Insurance rules may apply.)                                                         | [competitive-research.md](competitive-research.md#open-questions-before-mockups) |
 | P&L        | Cash-basis toggle? Freight as landed cost? Waiver claims as a rental cost? Inter-yard transfers shown? Target margin per category? | [profit-report.md](profit-report.md#decisions-and-open-questions)                |
-| Demo yard  | Owen Bakker's `/demo` card says he never sees prices, but his Purchasing role shows them. Change the card or his roles?            | [demo-and-uat.md](demo-and-uat.md)                                               |
 | Research   | Validate the rental module with 5 to 10 yard owners                                                                                | [competitive-research.md](competitive-research.md#open-questions-before-mockups) |
