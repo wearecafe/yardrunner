@@ -3,7 +3,7 @@
 Who can see and do what in YardRunner, and how the code enforces it. The
 product rules (roles, defaults, the access-by-screen table) are in
 [commerce-data-model.md](commerce-data-model.md#roles-and-permissions); the
-implementation detail is in [features.md](features.md#users-and-roles).
+implementation detail is in [modules/users-and-roles.md](modules/users-and-roles.md).
 Update this file whenever access changes.
 
 ## Who signs in where

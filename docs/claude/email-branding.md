@@ -95,3 +95,12 @@ A white-label flow: nothing a yard sees names the email service.
 Connect one real test domain and confirm the email service verifies the
 signing key and bounce records when they're reached through the CNAMEs.
 If it doesn't, the fallback is to show the yard the service's own records.
+
+## UAT rows
+
+Results are Jon's to fill in. IDs: `demo-and-uat.md` → UAT row IDs.
+
+| #            | What to check                                                                                                | Who | Result |
+| ------------ | ------------------------------------------------------------------------------------------------------------ | --- | ------ |
+| EM-1 (was 1) | Connect one real test domain and confirm it reaches Verified through the CNAMEs (DKIM and bounce MX/SPF)     | Jon |        |
+| EM-2 (was 2) | Customer and user emails render correctly in Gmail, Outlook (Windows and web) and Apple Mail, light and dark | Jon |        |

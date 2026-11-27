@@ -133,3 +133,11 @@ Mark each one; anything left blank I’ll build as recommended.
 - **Failures.** Each send is retried with back-off for a day. After that it shows on Settings → QuickBooks with the error from QBO and a “Send again” button. The owner gets an email the first time something fails.
 - **Nightly check.** Compares totals for the day’s invoices, payments and credit memos between YardRunner and QBO and lists any that differ.
 - **Disconnecting** stops new sends; everything already in QBO stays.
+
+## UAT rows
+
+Results are Jon's to fill in. IDs: `demo-and-uat.md` → UAT row IDs.
+
+| #            | What to check                                                                                           | Who        | Result |
+| ------------ | ------------------------------------------------------------------------------------------------------- | ---------- | ------ |
+| QB-1 (was 5) | Invoices, payments, credit memos and refunds land on the right accounts and tax codes in a real company | Accountant |        |

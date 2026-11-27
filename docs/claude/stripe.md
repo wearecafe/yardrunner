@@ -11,7 +11,7 @@ YardRunner uses Stripe in two separate ways, on the same platform account
 Decisions behind this are in
 [commerce-data-model.md](commerce-data-model.md#decisions) (Stripe Connect,
 tax engine, payment processor) and the billing section of
-[features.md](features.md#billing).
+[modules/billing.md](modules/billing.md).
 
 ## Card payments: Stripe Connect, white-labelled
 
@@ -53,7 +53,7 @@ under Settings → Payments, Sales tax.
 A base subscription, the Rentals add-on and Time and attendance seats, on
 YardRunner's own account and never on a yard's connected account. Amounts
 and lookup keys are in `config/yardrunner.php` (`billing`). See
-[features.md](features.md#billing) for how access follows the subscription.
+[modules/billing.md](modules/billing.md) for how access follows the subscription.
 
 ## Environment
 

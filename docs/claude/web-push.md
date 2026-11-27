@@ -3,7 +3,7 @@
 Staff alerts on phones and tablets are web push notifications sent with
 `minishlink/web-push` and a VAPID key pair; no third-party push service is
 involved beyond each browser's own push endpoint. What alerts exist and who
-gets them is in [features.md](features.md#installable-app-and-alerts).
+gets them is in [modules/app-and-alerts.md](modules/app-and-alerts.md).
 
 ## Keys
 
