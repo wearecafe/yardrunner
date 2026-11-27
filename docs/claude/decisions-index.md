@@ -18,6 +18,7 @@
 | Time and attendance                               | [time-and-attendance.md](time-and-attendance.md)                                                   | Phase 1 built                                       | Yes (Approve timesheets)              | TA-1       |
 | Marketing pages: cookieless, edge-cached          | [marketing-pages.md](marketing-pages.md)                                                           | Built (PR #59)                                      | No                                    | MK-1       |
 | Docs and workflow                                 | [docs-and-workflow.md](docs-and-workflow.md)                                                       | Built (PR #58, delivery-framework PR)               | No                                    |            |
+| Laravel stack rules (framework gaps)              | [stack-rules.md](stack-rules.md)                                                                   | In progress: plugin settings built                  | No                                    | DW-1       |
 | Backlog                                           | [gap-list.md](gap-list.md)                                                                         | Not built                                           |                                       |            |
 | Market research                                   | [competitive-research.md](competitive-research.md)                                                 | Reference                                           |                                       |            |
 

@@ -8,7 +8,7 @@ Status: built. PR #58 (Nov 27, 2026) moved all project knowledge into `docs/clau
 - Decisions are files in `decisions/` with a status. Every earlier decision was rewritten into its own file; the module notes' build-time detail waits in `decisions/pending.md`.
 - Each phase or feature has its own doc, listed in [decisions-index.md](decisions-index.md), with its UAT rows (IDs registered in [demo-and-uat.md](demo-and-uat.md#uat-row-ids)).
 - `scripts/docs_check.py` runs in the `docs-check` workflow on every PR and on main.
-- The `delivery` plugin's skills (`/feature-shaping`, `/phased-delivery`, `/security-review`, `/decision-batch`, `/project-setup`) are shared with the whole team by uploading the plugin under the claude.ai organization's Plugins & skills (an Owner's step; not done as of Nov 27). The repo doesn't point Claude Code at a plugin marketplace yet.
+- The `delivery` plugin's skills (`/feature-shaping`, `/phased-delivery`, `/security-review`, `/decision-batch`, `/project-setup`) are shared with the whole team by uploading the plugin under the claude.ai organization's Plugins & skills (an Owner's step; not done as of Nov 27). Since `stack-rules.md` phase 0, `.claude/settings.json` also offers the plugin in Claude Code from `wearecafe/framework`.
 - The claude.ai Project keeps only a pointer doc to this repo.
 
 ## Decisions
