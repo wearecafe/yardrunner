@@ -27,25 +27,25 @@ This file is loaded into every session, so it holds only what every session need
 
 ## Module notes (read before working on that area)
 
-| Area | Notes |
-| ---- | ----- |
-| Counter, orders, pricing, units | `docs/claude/modules/orders.md` |
-| Yard, picking, dispatch, drivers | `docs/claude/modules/fulfillment.md` |
-| Rentals | `docs/claude/modules/rentals.md` |
-| Inventory and purchasing | `docs/claude/modules/inventory.md` |
-| Receivables, returns, credit | `docs/claude/modules/receivables.md` |
-| Profit and loss | `docs/claude/modules/profit-and-loss.md` |
-| Contractor portal | `docs/claude/modules/portal.md` |
-| Time and attendance | `docs/claude/modules/time-and-attendance.md` |
-| Setup for new businesses | `docs/claude/modules/setup.md` |
-| Audit log | `docs/claude/modules/audit-log.md` |
-| Users, roles and permissions | `docs/claude/modules/users-and-roles.md` |
-| Installable app and alerts | `docs/claude/modules/app-and-alerts.md` |
-| Emails and branding | `docs/claude/modules/emails.md` |
-| Back office (YardRunner staff) | `docs/claude/modules/back-office.md` |
-| Billing (subscriptions) | `docs/claude/modules/billing.md` |
-| Demo yard | `docs/claude/modules/demo-yard.md` |
-| Help center | `docs/claude/modules/help-center.md` |
+| Area                             | Notes                                        |
+| -------------------------------- | -------------------------------------------- |
+| Counter, orders, pricing, units  | `docs/claude/modules/orders.md`              |
+| Yard, picking, dispatch, drivers | `docs/claude/modules/fulfillment.md`         |
+| Rentals                          | `docs/claude/modules/rentals.md`             |
+| Inventory and purchasing         | `docs/claude/modules/inventory.md`           |
+| Receivables, returns, credit     | `docs/claude/modules/receivables.md`         |
+| Profit and loss                  | `docs/claude/modules/profit-and-loss.md`     |
+| Contractor portal                | `docs/claude/modules/portal.md`              |
+| Time and attendance              | `docs/claude/modules/time-and-attendance.md` |
+| Setup for new businesses         | `docs/claude/modules/setup.md`               |
+| Audit log                        | `docs/claude/modules/audit-log.md`           |
+| Users, roles and permissions     | `docs/claude/modules/users-and-roles.md`     |
+| Installable app and alerts       | `docs/claude/modules/app-and-alerts.md`      |
+| Emails and branding              | `docs/claude/modules/emails.md`              |
+| Back office (YardRunner staff)   | `docs/claude/modules/back-office.md`         |
+| Billing (subscriptions)          | `docs/claude/modules/billing.md`             |
+| Demo yard                        | `docs/claude/modules/demo-yard.md`           |
+| Help center                      | `docs/claude/modules/help-center.md`         |
 
 When a module gets substantial work, start its notes file and add a row here.
 
