@@ -5,32 +5,51 @@ import tailwindcss from '@tailwindcss/vite';
 import react, { reactCompilerPreset } from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { bunny } from 'laravel-vite-plugin/fonts';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, lazyPlugins } from 'vite-plus';
 
+// Under Vitest only React is needed: no PHP (Wayfinder), font downloads
+// (Laravel's Bunny fonts) or CSS build.
+const testing = process.env.VITEST === 'true';
+
 export default defineConfig({
-    plugins: lazyPlugins(() => [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.tsx'],
-            refresh: true,
-            fonts: [
-                bunny('IBM Plex Sans', {
-                    weights: [400, 500, 600, 700],
-                }),
-                bunny('IBM Plex Mono', {
-                    weights: [500],
-                }),
-            ],
-        }),
-        inertia(),
-        react(),
-        babel({
-            presets: [reactCompilerPreset()],
-        }),
-        tailwindcss(),
-        wayfinder({
-            formVariants: true,
-        }),
-    ]),
+    plugins: lazyPlugins(() =>
+        testing
+            ? [react()]
+            : [
+                  laravel({
+                      input: ['resources/css/app.css', 'resources/js/app.tsx'],
+                      refresh: true,
+                      fonts: [
+                          bunny('IBM Plex Sans', {
+                              weights: [400, 500, 600, 700],
+                          }),
+                          bunny('IBM Plex Mono', {
+                              weights: [500],
+                          }),
+                      ],
+                  }),
+                  inertia(),
+                  react(),
+                  babel({
+                      presets: [reactCompilerPreset()],
+                  }),
+                  tailwindcss(),
+                  wayfinder({
+                      formVariants: true,
+                  }),
+              ],
+    ),
+    resolve: {
+        // The Laravel plugin sets this for builds; tests skip that plugin.
+        alias: testing
+            ? {
+                  '@': fileURLToPath(
+                      new URL('./resources/js', import.meta.url),
+                  ),
+              }
+            : {},
+    },
     server: {
         watch: {
             ignored: [
@@ -41,6 +60,13 @@ export default defineConfig({
                 '**/vendor/**',
             ],
         },
+    },
+    // Frontend tests (npm test): Vitest and React Testing Library, as
+    // *.test.ts(x) beside the code.
+    test: {
+        environment: 'jsdom',
+        include: ['resources/js/**/*.test.{ts,tsx}'],
+        setupFiles: ['resources/js/test/setup.ts'],
     },
     lint: {
         ignorePatterns: [

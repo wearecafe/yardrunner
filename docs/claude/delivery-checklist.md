@@ -19,7 +19,8 @@ branch and PR; every phase ships something whole.
    realistic loose ends (something overdue, something awaiting review),
    dated relative to today and seeded idempotently.
 5. **Tests:** access for every role, the main workflow, validation, edge
-   cases found while building. New sensitive fields and roles go into the
+   cases found while building. Frontend logic and components with rules of
+   their own get a `*.test.ts(x)` beside them. New sensitive fields and roles go into the
    security checks ([security.md](security.md)).
 6. **Docs for people:** a help article in `resources/help/{category}`,
    related articles updated (always `getting-started/staff-and-roles.md`
@@ -44,6 +45,7 @@ branch and PR; every phase ships something whole.
     vendor/bin/pint --dirty
     npm run check:fix    # format + lint fixes
     npm run types:check
+    npm test             # Vitest: *.test.ts(x) beside the code
     npm run build
     composer test        # Pint, PHPStan, PHPUnit
     npm run check        # format + lint, as CI runs it
