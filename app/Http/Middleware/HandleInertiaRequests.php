@@ -58,7 +58,10 @@ class HandleInertiaRequests extends Middleware
             ...parent::share($request),
             'name' => config('app.name'),
             'auth' => [
-                'user' => $request->user(),
+                // Only what the layouts show: never the whole model (roles,
+                // permissions, phone and tenant stay on the server). Guarded by
+                // SharedPropsTest.
+                'user' => $request->user()?->only(['id', 'name', 'email', 'email_verified_at']),
                 'roles' => fn () => array_map(fn (UserRole $r) => ['value' => $r->value, 'label' => $r->label()], $request->user()?->roleList() ?? []),
                 'can' => [
                     'manageBusiness' => (bool) $request->user()?->canManageBusiness(),

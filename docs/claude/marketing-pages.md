@@ -25,7 +25,7 @@ None. Signed-in people see the same pages as everyone else; "Log in" takes them 
 - Guest routes, all GET: `/`, `/help…`, `/help/suggest` (throttled 120/min). Listed in [security.md](security.md#guest-routes).
 - Nothing per visitor reaches the cached HTML: the user resolver is cleared, and the sidebar prop doesn't read its cookie on these pages.
 - 404s, errors and throttled responses are never cached.
-- Tests: `tests/Feature/MarketingPagesTest.php`.
+- Tests: `tests/Feature/MarketingPagesTest.php` (cookies, cache headers, every help page, links that resolve, no forms that post).
 
 ## UAT rows
 
