@@ -155,7 +155,8 @@ class UserAccountsTest extends TestCase
         $sales->refresh();
         $this->assertTrue($sales->hasPermission(Permission::SetManualPrices));
         $this->assertFalse($sales->hasPermission(Permission::SeeCosts));
-        $this->assertSame(['set_manual_prices' => true, 'see_costs' => false], $sales->permissions);
+        // MySQL stores JSON keys in its own order; only keys and values matter.
+        $this->assertEquals(['set_manual_prices' => true, 'see_costs' => false], $sales->permissions);
 
         $logged = AuditEvent::query()->where('subject_id', $sales->id)->where('event', 'permissions changed')->firstOrFail();
         $this->assertSame(['from roles', 'granted'], $logged->changes['Set manual line prices']);

@@ -86,7 +86,8 @@ Routes anyone can reach without signing in. Each needs a test.
 | Scoped queries, no-tenant fails closed, bound models hidden, foreign IDs rejected                                                       | `TenancyTest`                                | In place |
 | Role reach and permissions                                                                                                              | `RolesAndPermissionsTest`                    | In place |
 | Yard scope on lists and records                                                                                                         | `YardScopeTest`                              | In place |
-| Every demo-yard page renders on MySQL                                                                                                   | `DemoYardTest` (`mysql` CI job)              | In place |
+| Every demo-yard page renders on MySQL                                                                                                   | `DemoYardTest` (whole suite on MySQL in CI)  | In place |
+| Migrations roll back and re-run                                                                                                         | `Migrations roll back` step in `tests`       | In place |
 | Static analysis, formatting, types                                                                                                      | PHPStan, Pint, ESLint, Prettier, `tsc` in CI | In place |
 | Dependency updates                                                                                                                      | Dependabot                                   | In place |
 | Cross-tenant probe: another tenant's admin on every route and method with this tenant's IDs (403/404)                                   | —                                            | Missing  |

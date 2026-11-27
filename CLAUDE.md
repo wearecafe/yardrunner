@@ -52,7 +52,7 @@ When a module gets substantial work, start its notes file and add a row here.
 ## Stack
 
 - Laravel 13 on Laravel Cloud (`docs/claude/laravel-cloud.md`). Fortify for sign-in (email and password, TOTP two-factor). Inertia 3, React 19, TypeScript, Tailwind 4 and shadcn/ui. Wayfinder for typed routes. Stay with shadcn: one documented design system across the app.
-- MySQL in production. The main suite runs on SQLite; the `mysql` CI workflow runs raw SQL and every demo-yard page on MySQL 8.4. Every migration has a working `down`.
+- MySQL in production and CI: the `tests` workflow runs the whole suite on MySQL 8.4 and rolls every migration back and forward first. SQLite is fine locally. Every migration has a working `down`. `composer.lock` is committed; any dependency advisory fails CI.
 - Fonts are self-hosted (Bunny Fonts, downloaded at build). No third-party font or script requests from the app.
 - Files go to `YARDRUNNER_FILES_DISK` (a private Laravel Cloud bucket in production) and are served through `FileController`, which checks access. Never `->url()` or public visibility.
 - Queues run QuickBooks sync, alerts and billing updates. Jobs that touch tenant data take the tenant id and set it first.
