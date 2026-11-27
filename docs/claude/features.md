@@ -1,7 +1,7 @@
 # What's in YardRunner
 
 A map of the modules, the screens that use them, and where the rules live.
-Mockups for each screen are in [scope/mockups](scope/mockups).
+Mockups for each screen are in [mockups](mockups).
 
 ## Counter and orders
 
@@ -319,7 +319,7 @@ Employees and exports. Pay rates aren't stored.
 ## Setup for new businesses
 
 What a business fills in after signing up (or after staff set it up in
-the back office). Scope: [scope/tenant-setup.md](scope/tenant-setup.md).
+the back office). Scope: [tenant-setup.md](tenant-setup.md).
 Code: `App\Onboarding\Setup`, `SetupController`, `EnsureSetUp`,
 `pages/setup/*`, `layouts/setup-layout.tsx`.
 
@@ -558,20 +558,20 @@ local development use the fakes. Tests answer DNS with
 
 ## Integrations
 
-- **Stripe** for payments and **Stripe Tax** for tax, on a connected
-  account per yard (Stripe Connect, white-labelled). Settings → Payments
-  (`Settings\PaymentsController`, `app/Payments/Connect`) creates the
-  account and hosts Stripe's embedded components: onboarding, payouts,
-  payments and disputes, business and bank details, tax settings and
-  registrations, documents. The `account.updated` webhook keeps
-  `tenants.stripe_charges_enabled` and friends current. Card payments are
-  refused until charges are on; each one carries YardRunner's application
-  fee (`yardrunner.payments.application_fee`), set at capture for deposit
-  holds. Local development and the demo yard simulate setup
-  (`FakeConnectAccounts`). See [laravel-cloud.md](laravel-cloud.md).
-- **QuickBooks Online** receives invoices, payments, credit memos, refunds
-  and rental invoices, and sends back payments entered there. See
-  [quickbooks.md](quickbooks.md).
+Each outside service has its own file, with what it does, the code behind
+it, its environment variables and how to set it up:
+
+| Service                                   | File                                   |
+| ----------------------------------------- | -------------------------------------- |
+| Stripe: Connect, Stripe Tax and Billing   | [stripe.md](stripe.md)                 |
+| QuickBooks Online                         | [quickbooks.md](quickbooks.md)         |
+| Resend: email and yards' sending domains  | [resend.md](resend.md)                 |
+| Cloudflare DNS for sending domains        | [cloudflare-dns.md](cloudflare-dns.md) |
+| Twilio: text messages                     | [twilio.md](twilio.md)                 |
+| Web push: staff alerts                    | [web-push.md](web-push.md)             |
+| File storage (S3 bucket)                  | [file-storage.md](file-storage.md)     |
+| Bunny Fonts (build time only)             | [bunny-fonts.md](bunny-fonts.md)       |
+| Laravel Cloud: hosting and the edge cache | [laravel-cloud.md](laravel-cloud.md)   |
 
 ## Back office
 
@@ -682,7 +682,7 @@ Set `YARDRUNNER_SUPPORT_EMAIL` to show contact links.
 
 ## Not built yet
 
-Features the scope (`docs/scope`) calls for that aren't built, or are
+Features the scope docs in `docs/claude` call for that aren't built, or are
 only partly built. Add to this list when something is left out, and
 remove an item when it ships.
 

@@ -31,7 +31,7 @@ use Inertia\Response;
 /**
  * Setup: what a new business fills in after signing up. The business and
  * its yards are required; everything after can be skipped and stays on the
- * checklist on Today. See App\Onboarding\Setup and docs/scope/tenant-setup.md.
+ * checklist on Today. See App\Onboarding\Setup and docs/claude/tenant-setup.md.
  */
 class SetupController extends Controller
 {

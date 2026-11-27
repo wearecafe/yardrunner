@@ -1,8 +1,9 @@
 # YardRunner Email Branding
 
-Oct 27, 2026 · @Jon Moore. The full spec, with the email catalogue, layout
-rules and design mockups, is the "YardRunner Email Branding" doc in the
-claude.ai project. This is the summary the code follows.
+Oct 27, 2026 · @Jon Moore. The full spec, with the email catalogue and
+layout rules, is [email-branding-spec.md](email-branding-spec.md); the
+design mockups are the "YardRunner Email Designs" design on claude.ai. This
+is the summary the code follows.
 
 ## Two brands, decided by the recipient
 
